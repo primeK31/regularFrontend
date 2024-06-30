@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import {useEffect, useState} from 'react';
 import {jwtDecode as jwt_decode}from 'jwt-decode';
 import Heads from './components/header'
+import Foots from './components/footer';
 import './App.css';
 
 const CLIENT_ID = "979867492503-ammrj7c12beo51f4k80nnfbmho85akkr.apps.googleusercontent.com";
@@ -102,19 +103,31 @@ function App() {
   return (
     <div className="App">
       <Heads />
+      <div className="flex flex-col items-center justify-between h-screen p-4">
       <div id="signInDiv"></div>
-      { Object.keys(user).length != 0 &&
-        <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
-      }
-      { user &&
-        <div>
-          <img src={user.picture}></img>
-          <h3>{user.name}</h3>
-          <input type="submit" onClick={createDriveFile} value="Create form"></input>
-          <input type="file" onChange={onFileChange} />
-          <button onClick={onFileUpload}>Upload!</button>
+        { Object.keys(user).length != 0 &&
+          <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
+        }
+        { user &&
+          <div>
+            <img src={user.picture}></img>
+            <h3>{user.name}</h3>
+            <input className="m-5" type="file" onChange={onFileChange} />
+            <button className="m-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" onClick={onFileUpload}>Upload!</button>
+          </div>
+        }
+
+        <div class="flex flex-col w-full max-w-2xl border border-gray-300 rounded-lg shadow-lg p-4 my-4 flex-1">
+            <div class="flex-1 overflow-y mb-4 list-none flex-flow-none">
+            </div>
+            <div class="flex">
+                <input type="text" placeholder="Type a message..." class="flex-1 p-2 border border-gray-200 rounded-l-lg" />
+                <input className="my-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" type="submit" onClick={createDriveFile} value="Create form"></input>
+            </div>
         </div>
-      }
+
+      </div>
+      <Foots />
     </div>
   );
 }
