@@ -79,7 +79,7 @@ function Start() {
       formData.append('text', textInput);
     }
 
-    const response = await fetch('http://localhost:8000/uploadfile/', {
+    const response = await fetch('https://regularbackend-production.up.railway.app/uploadfile/', {
       method: 'POST',
       body: formData,
     });
@@ -88,7 +88,7 @@ function Start() {
     const filename = new FormData();
     filename.append('text', result.pdf_name);
 
-    const vector = await fetch(`http://localhost:8000/vector?name=${result.pdf_name}`);
+    const vector = await fetch(`https://regularbackend-production.up.railway.app/vector?name=${result.pdf_name}`);
 
     const lol = await vector.json();
 
